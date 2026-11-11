@@ -1,0 +1,16 @@
+{
+  // Lint every Markdown file except dependencies and generated eval output.
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "**/evals/results/**"],
+  "config": {
+    "default": true,
+    // Line length is enforced by readability review, not a hard wrap.
+    "MD013": false,
+    // Skills and templates use inline HTML comments as authoring notes.
+    "MD033": false,
+    // Eval prompt.md and grader files start with YAML frontmatter, not a heading.
+    "MD041": false,
+    // Templates contain <placeholder> headings repeated across sections.
+    "MD024": { "siblings_only": true },
+  },
+}

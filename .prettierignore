@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+**/evals/results/
+# Templates are copied verbatim into other repos; their own repo's Prettier formats them there.
+plugins/*/skills/*/templates/**/*.cls
