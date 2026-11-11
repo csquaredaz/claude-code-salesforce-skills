@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: creates-repo-skeleton
+description: Explicit invocation scaffolds a repo with filled placeholders. Needs --scaffold (git init) and --allow-tools Bash Write Edit.
+tags: [scaffold, positive]
+context:
+  scaffold_script: setup.sh
