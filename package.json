@@ -22,9 +22,5 @@
     "lint-staged": "17.6.0",
     "markdownlint-cli2": "0.24.0",
     "prettier": "3.10.0"
-  },
-  "lint-staged": {
-    "*.{md,json,yml,yaml}": "prettier --write",
-    "*.md": "markdownlint-cli2"
   }
 }
