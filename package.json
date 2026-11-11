@@ -11,8 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:md": "markdownlint-cli2",
-    "lint": "npm run format:check && npm run lint:md",
-    "prepare": "husky"
+    "lint": "npm run format:check && npm run lint:md && npm run check:templates",
+    "prepare": "husky",
+    "check:templates": "cmp .gitleaks.toml plugins/apex-standards/skills/sf-repo-scaffold/templates/sf-repo/.gitleaks.toml"
   },
   "devDependencies": {
     "@commitlint/cli": "21.2.4",
