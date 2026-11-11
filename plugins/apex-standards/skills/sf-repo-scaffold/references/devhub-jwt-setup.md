@@ -50,6 +50,8 @@ chmod 600 server.key
 
 ## 6. Prove it works locally before touching GitHub
 
+First check the CLI version: `sf --version` must be **2.147.7 or later**. Older versions silently ignore the `SF_SCRATCH_SIGNUP_*` variables, and signup fails with `C-1016` even though the JWT login succeeds. Upgrade with `brew upgrade sf` or `npm install -g @salesforce/cli@latest`, depending on how it was installed.
+
 ```bash
 sf org login jwt \
   --client-id <CONSUMER_KEY> \
