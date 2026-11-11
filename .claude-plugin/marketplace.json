@@ -1,0 +1,17 @@
+{
+  "name": "csquaredaz",
+  "description": "Salesforce engineering standards for Claude Code: FFLIB layering, Apex security, testing, code review and repo scaffolding.",
+  "owner": {
+    "name": "Chad Countryman",
+    "url": "https://github.com/csquaredaz"
+  },
+  "plugins": [
+    {
+      "name": "apex-standards",
+      "source": "./plugins/apex-standards",
+      "description": "Skills that hold Apex work to FFLIB layering, user-mode security, isolated testing and severity-graded review.",
+      "category": "development",
+      "tags": ["salesforce", "apex", "fflib", "code-review", "testing"]
+    }
+  ]
+}

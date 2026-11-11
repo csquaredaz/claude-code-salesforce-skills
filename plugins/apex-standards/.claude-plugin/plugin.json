@@ -1,0 +1,14 @@
+{
+  "name": "apex-standards",
+  "displayName": "Apex Standards",
+  "version": "0.1.0",
+  "description": "Salesforce Apex engineering standards as Claude Code skills: FFLIB layering, user-mode security, isolated testing and severity-graded code review.",
+  "author": {
+    "name": "Chad Countryman",
+    "url": "https://github.com/csquaredaz"
+  },
+  "homepage": "https://github.com/csquaredaz/claude-code-salesforce-skills",
+  "repository": "https://github.com/csquaredaz/claude-code-salesforce-skills",
+  "license": "MIT",
+  "keywords": ["salesforce", "apex", "fflib", "security", "testing", "code-review"]
+}
