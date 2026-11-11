@@ -52,6 +52,25 @@ jobs:
           --to ${{ github.event.pull_request.head.sha }}
           --verbose
 
+  plugin:
+    name: plugin schema (claude plugin validate)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      # The CLI is installed only for its offline validator. No ANTHROPIC_API_KEY is configured
+      # on purpose: validation makes no model calls, and eval runs stay local (ADR 0002).
+      - run: npm install -g @anthropic-ai/claude-code@2.1.322
+      - name: Validate marketplace
+        run: claude plugin validate --strict .
+      - name: Validate every plugin
+        run: |
+          for dir in plugins/*/; do
+            claude plugin validate --strict "$dir"
+          done
+
   secrets:
     name: secret scan (gitleaks, full history)
     runs-on: ubuntu-latest

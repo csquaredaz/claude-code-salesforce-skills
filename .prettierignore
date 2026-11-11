@@ -1,5 +1,6 @@
 node_modules/
 package-lock.json
 **/evals/results/
-# Templates are copied verbatim into other repos; their own repo's Prettier formats them there.
-plugins/*/skills/*/templates/**/*.cls
+# The Salesforce repo template carries its own Prettier config (with Apex/XML plugins) and is
+# formatted by the repo it is copied into.
+plugins/*/skills/sf-repo-scaffold/templates/

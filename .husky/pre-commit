@@ -1,4 +1,6 @@
-npx lint-staged
+# An explicit --config stops lint-staged from discovering the scaffold template's own
+# package.json, whose Apex Prettier plugins are not installed in this repo.
+npx lint-staged --config .lintstagedrc.json
 if command -v gitleaks >/dev/null 2>&1; then
   gitleaks git --staged --no-banner --redact --config .gitleaks.toml
 else
