@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Salesforce CLI state and auth (never commit)
+.sf/
+.sfdx/
+*.key
+*.pem
+.env
+.env.*
+
+# Eval run output (reports are regenerated locally; see docs/adr/0002-eval-strategy.md)
+**/evals/results/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.log
