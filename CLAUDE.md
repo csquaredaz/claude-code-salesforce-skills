@@ -25,6 +25,7 @@ A Claude Code marketplace (`csquaredaz`) that hosts one plugin, `plugins/apex-st
 ## Workflow
 
 - Branch per feature (`feat/…`, `build/…`, `docs/…`), PR into `main`, merge commit so the small commits stay visible.
+- **Every PR targets `main`. No stacked PRs.** Branch the next feature only after the previous PR is merged. A stacked PR merges into its parent branch unless that branch is deleted first, which silently keeps work off `main` (it happened once here; PR #5 repaired it).
 - Conventional Commits with scopes from `commitlint.config.mjs`.
 - AI-assisted commits keep the `Co-Authored-By: Claude` trailer.
 - Before pushing: `npm run lint` and `claude plugin validate --strict plugins/apex-standards`.

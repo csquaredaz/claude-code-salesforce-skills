@@ -14,7 +14,7 @@ Last updated: 2026-11-11 · Phase: step 0 (first pass) of the portfolio roadmap
 
 ## Next
 
-1. **Owner action:** grant the `gh` token the `workflow` scope (`gh auth refresh -h github.com -s workflow`) so branches containing `.github/workflows/` can be pushed. Then push the stacked branches and open PRs in order: `build/repo-tooling` → `feat/apex-standards-skills` → `feat/repo-scaffold` → `test/eval-suite`.
+1. **Done:** `gh` token has the `workflow` scope, PRs #1–#4 are merged, #5 landed the stack on `main`, and the feature branches are deleted.
 2. Optional, owner's choice: run the eval suite locally once (`claude plugin eval plugins/apex-standards --runs 1 --ablation none`, adding `--scaffold --allow-tools Bash Write Edit` for the scaffold case) and paste the summary into the eval PR.
 3. Start repo A (`apex-core-lib`) with `/apex-standards:sf-repo-scaffold apex-core-lib`, after the Dev Hub JWT setup in `plugins/apex-standards/skills/sf-repo-scaffold/references/devhub-jwt-setup.md`.
 
@@ -34,6 +34,8 @@ Last updated: 2026-11-11 · Phase: step 0 (first pass) of the portfolio roadmap
 | FFLIB core in repo A                       | Lean in-repo core vs vendored upstream `fflib-apex-common`                                                                      | Lean core                               | Repo A, session 1    |
 
 ## Notes for the next session
+
+- **No stacked PRs.** PRs #2–#4 targeted their parent branches and merged there, not into `main`. PR #5 repaired it with no history rewrite. From now on every PR targets `main`, and the next branch starts only after the previous merge.
 
 - `claude plugin validate` rejects plugin names starting with `claude-`, and warns on the word "claude" anywhere.
 - A free Developer Edition Dev Hub can't create new Connected Apps, so the CI template uses an External Client App with `SF_SCRATCH_SIGNUP_CONNECTED_APP=PlatformCLI` (CLI 2.147.7 or later).
