@@ -1,6 +1,7 @@
 # {{REPO_NAME}}
 
 [![ci](https://github.com/{{GITHUB_OWNER}}/{{REPO_NAME}}/actions/workflows/ci.yml/badge.svg)](https://github.com/{{GITHUB_OWNER}}/{{REPO_NAME}}/actions/workflows/ci.yml)
+![Apex coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/{{GITHUB_OWNER}}/{{REPO_NAME}}/badges/coverage.json)
 ![API version](https://img.shields.io/badge/Salesforce%20API-{{API_VERSION}}-00A1E0)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
