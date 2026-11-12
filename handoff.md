@@ -11,6 +11,7 @@ Last updated: 2026-11-11 · Phase: step 0 (first pass) of the portfolio roadmap
 - Scaffold templates smoke-tested in a scratch repo: format, lint, Jest and Code Analyzer all pass.
 - Eval suite: 10 cases, free graders only, with a positive and a negative case per skill.
 - ADRs 0001 (layout and naming) and 0002 (free-only evals). README in the seven-section format. Example CLAUDE.md.
+- 2026-11-12: back-ported apex-core-lib's proven CI to the scaffold template: the `reuse` job, the `test-result-<runId>.json` fix, skipping tests before any exist, the coverage gate and badge, org-detail redaction (username regex now needs an alphabetic TLD), `release.yml`, and a PMD ruleset for `method_condition_result` test names. Smoke-tested on a filled template.
 
 ## Next
 
