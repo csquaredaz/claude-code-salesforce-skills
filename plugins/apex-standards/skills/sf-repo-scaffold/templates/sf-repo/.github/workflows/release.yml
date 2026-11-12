@@ -88,7 +88,7 @@ jobs:
             --set-default-dev-hub 2>&1 | bash scripts/redact-org-details.sh
 
       # --code-coverage runs the package's own tests in a build org shaped by the package
-      # directory's definitionFile. Only the package directory is packaged; unpackaged directories never are.
+      # directory's definitionFile. Only the package directory is packaged.
       # --installation-key-bypass: the library is open source, so there is no install key to protect.
       - name: Create package version
         id: create

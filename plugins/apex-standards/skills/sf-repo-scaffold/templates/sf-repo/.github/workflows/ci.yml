@@ -237,9 +237,9 @@ jobs:
           sf org delete scratch --target-org ci-org --no-prompt 2>&1 | bash scripts/redact-org-details.sh || true
           rm -f "$RUNNER_TEMP/server.key"
 
-  # Live coverage badge without a SaaS account (shields.io endpoint, no Codecov). Runs only for a green push to main and
-  # is the only job with write access. It appends to the orphan `badges` branch and never
-  # force-pushes. The README reads the file through a shields.io endpoint badge.
+  # Live coverage badge without a SaaS account (a shields.io endpoint, no Codecov). Runs only for a
+  # green push to main and is the only job with write access. It appends to the orphan `badges`
+  # branch and never force-pushes. The README reads the file through the endpoint badge.
   coverage-badge:
     name: coverage badge (main only)
     needs: [scratch-org, reuse]
