@@ -13,7 +13,7 @@
     "lint:md": "markdownlint-cli2",
     "lint": "npm run format:check && npm run lint:md && npm run check:templates && npm run check:evals",
     "prepare": "husky",
-    "check:templates": "cmp .gitleaks.toml plugins/apex-standards/skills/sf-repo-scaffold/templates/sf-repo/.gitleaks.toml",
+    "check:templates": "cmp .gitleaks.toml plugins/apex-standards/skills/sf-repo-scaffold/templates/sf-repo/.gitleaks.toml && cmp LICENSE plugins/apex-standards/skills/sf-repo-scaffold/templates/sf-repo/LICENSE",
     "check:evals": "node scripts/check-evals.mjs"
   },
   "devDependencies": {

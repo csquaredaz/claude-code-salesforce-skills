@@ -50,7 +50,7 @@ Create the repo skeleton from [templates/sf-repo/](templates/sf-repo/) and fill 
 | Coverage badge  | The `coverage-badge` job writes `coverage.json` to an orphan `badges` branch, which a shields.io endpoint badge reads. It runs on `main` only and never force-pushes                                                                                       |
 | Release         | `release.yml`: a `vX.Y.Z` tag builds a beta package version and a pre-release. Promotion is a manual `workflow_dispatch` with `confirm=PROMOTE` that rewrites the notes                                                                                    |
 | Cost            | Free only: no coverage SaaS, no paid actions, no model calls. Coverage goes to the job summary, an artifact and the badge                                                                                                                                  |
-| Docs            | README in the portfolio's seven-section order, CLAUDE.md, ADR template, handoff, case study                                                                                                                                                                |
+| Docs            | README in the portfolio's seven-section order, CLAUDE.md, ADR template, handoff, case study, and the MIT `LICENSE` the README declares                                                                                                                     |
 
 ## Don't
 
