@@ -81,7 +81,7 @@ jobs:
   # identical to its PR-head parent, and that PR head has a ci run whose scratch-org job passed,
   # the identical code was already deployed and tested. Reuse that run's result and coverage
   # instead of creating another org. Anything else (squash merge, a PR branch behind main, no green
-  # run, missing artifact) falls through to a fresh scratch-org run.
+  # run, missing artifact while tests exist) falls through to a fresh scratch-org run.
   reuse:
     name: reuse PR scratch-org result (main only)
     needs: static
@@ -113,6 +113,22 @@ jobs:
           for run_id in $(gh run list --workflow ci.yml --commit "$pr_head" --status success --json databaseId -q '.[].databaseId'); do
             job=$(gh run view "$run_id" --json jobs -q '.jobs[] | select(.name == "scratch org (deploy + Apex tests)") | .conclusion')
             [ "$job" = "success" ] || continue
+            # A green run uploads no apex-test-results artifact when the repo has no test classes yet
+            # (the test step skips). The tree is identical, so check this checkout for test classes:
+            # none means the skip was right, so reuse with no coverage (the badge job then skips).
+            # A missing artifact while test classes exist is unexpected, so that falls through.
+            artifacts=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts" \
+              -q '[.artifacts[] | select(.name == "apex-test-results")] | length') || continue
+            if [ "$artifacts" = "0" ]; then
+              dirs=$(node -p 'require("./sfdx-project.json").packageDirectories.map((d) => d.path).join(" ")')
+              # shellcheck disable=SC2086 # word splitting over the directory list is intended
+              tests=$(find $dirs -name '*Test.cls' -exec grep -li '@istest' {} + 2>/dev/null || true)
+              [ -z "$tests" ] || continue
+              echo "reuse=true" >> "$GITHUB_OUTPUT"
+              echo "coverage=" >> "$GITHUB_OUTPUT"
+              echo "### Apex tests"$'\n\n'"Reused run [$run_id](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/$run_id) for PR head \`${pr_head:0:7}\` (identical tree): no Apex test classes yet, so tests were skipped. No scratch org created." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
             mkdir -p tests/apex
             gh run download "$run_id" --name apex-test-results --dir tests/apex || continue
             # package-coverage.txt is this repo's own coverage, written by the scratch-org job.
