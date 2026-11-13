@@ -5,7 +5,9 @@
       "default": true,
       "package": "{{REPO_NAME}}",
       "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT"
+      "versionNumber": "0.1.0.NEXT",
+      "versionDescription": "{{ONE_LINE_PURPOSE}}",
+      "definitionFile": "config/project-scratch-def.json"
     }
   ],
   "name": "{{REPO_NAME}}",
