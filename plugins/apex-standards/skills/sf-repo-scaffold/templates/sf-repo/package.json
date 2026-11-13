@@ -7,8 +7,8 @@
     "node": ">=24"
   },
   "scripts": {
-    "format": "prettier --write \"**/*.{cls,trigger,js,html,css,json,md,xml,yml}\"",
-    "format:check": "prettier --check \"**/*.{cls,trigger,js,html,css,json,md,xml,yml}\"",
+    "format": "prettier --write \"**/*.{cls,trigger,js,mjs,html,css,json,md,xml,yml}\"",
+    "format:check": "prettier --check \"**/*.{cls,trigger,js,mjs,html,css,json,md,xml,yml}\"",
     "lint": "eslint --no-error-on-unmatched-pattern \"**/lwc/**/*.js\"",
     "test:unit": "sfdx-lwc-jest --coverage",
     "analyze": "sf code-analyzer run --config-file code-analyzer.yml --rule-selector Recommended --severity-threshold 2 --view table",
@@ -33,7 +33,7 @@
     "prettier-plugin-apex": "2.3.0"
   },
   "lint-staged": {
-    "**/*.{cls,trigger,js,html,css,json,md,xml,yml}": "prettier --write",
+    "**/*.{cls,trigger,js,mjs,html,css,json,md,xml,yml}": "prettier --write",
     "**/lwc/**/*.js": "eslint"
   }
 }
