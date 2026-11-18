@@ -1,6 +1,6 @@
 # Handoff: claude-code-salesforce-skills
 
-Last updated: 2026-11-13 · Phase: between roadmap steps. A and B are done and public; C (`apex-event-ingestion`) is next. The step 6 final pass hasn't started.
+Last updated: 2026-11-18 · Phase: between roadmap steps. A, B and C are done and public; D (`apex-design-patterns`) is next. The step 6 final pass hasn't started.
 
 ## Done
 
@@ -22,6 +22,12 @@ Last updated: 2026-11-13 · Phase: between roadmap steps. A and B are done and p
   - `commitlint.config.mjs` broke the template's own `trailingComma: none`. The format and lint-staged globs skipped `.mjs`, which is why nothing caught it. Both are fixed.
   - Kept unchanged: `redact-org-details.sh` and the result scrubbing (B's going-public audit found them sufficient).
 
+- **C back-port** (`ci/scaffold-skip-permsets`, 2026-11-18). What C's first release proved, applied before D's scaffold:
+  - `org-setup.sh`: `SKIP_PERMSETS=1` deploys and stops before assigning permission sets. Without it, the script assigns the permission sets from every package directory (for example an unpackaged `example/`), not just `force-app`.
+  - `ci.yml`: the scratch-org setup step sets `SKIP_PERMSETS: "1"`, so CI's running admin has none of the repo's permission sets, as in the org where `sf package version create --code-coverage` runs the tests. C's first `v1.0.0` build failed on 17 tests that leaned on the admin's access, which CI had hidden.
+  - `SKILL.md` step 8: a repo that publishes a package runs `sf package create` once before its first tag, then restores `sfdx-project.json` keeping only the `0Ho` alias. A source-only repo also changes the Stack line in its `CLAUDE.md`.
+  - Verified with a filled copy and a stub `sf`: with `SKIP_PERMSETS=1` the script deploys and assigns nothing, and without it it assigns permission sets from both directories. shellcheck is clean, and actionlint shows only the known notes (SC1083, SC2016, SC2038). D's scaffold is the first real run.
+
 ## How the back-port was verified (no scratch orgs)
 
 - Filled-template smoke test: 0 placeholders left, then `npm install`, `format:check`, `lint`, `test:unit`, `analyze` (1 Low), `shellcheck`, a JSON parse, and commitlint on a good and a bad message. `format:check` fails when the trailing comma is put back.
@@ -35,25 +41,6 @@ Last updated: 2026-11-13 · Phase: between roadmap steps. A and B are done and p
 
 ## Next
 
-1. **Repo C** (`apex-event-ingestion`, roadmap step 3): scaffold with `/apex-standards:sf-repo-scaffold apex-event-ingestion`, plan first. It depends on apex-core-lib `1.1.0-1` (`04tak000000u3MbAAI`).
-2. Optional, owner's choice: run the eval suite locally once (`claude plugin eval plugins/apex-standards --runs 1 --ablation none`, adding `--scaffold --allow-tools Bash Write Edit` for the scaffold case) and paste the summary into a PR.
-
-## Final pass (roadmap step 6), not started
-
-- Second plugin `sf-delivery-agents` with role-scoped agents.
-- Hooks: for example, Prettier on Apex after Edit/Write.
-- PR-review demo: `apex-code-review` reviewing a real PR in `apex-event-ingestion`.
-- `docs/case-study.md`.
-- Plugin icon (only needed for a directory submission).
-
-## Open decisions
-
-None. The coverage badge (shields.io endpoint on a `badges` branch) and a lean in-repo FFLIB core were both decided in repo A.
-
-## Notes for the next session
-
-- **No stacked PRs.** Every PR targets `main`; the next branch starts only after the previous merge.
-- `claude plugin validate` rejects plugin names starting with `claude-`, and warns on the word "claude" anywhere.
-- E's own lint skips `templates/` on purpose (`.prettierignore`). Check template formatting by filling it into a scratch repo and running its `format:check`.
-- A free Developer Edition Dev Hub can't create new Connected Apps, so the CI template uses an External Client App with `SF_SCRATCH_SIGNUP_CONNECTED_APP=PlatformCLI` (CLI 2.147.7 or later).
-- The Dev Hub budget is 3 active and 6 daily scratch orgs, and 6 package versions per day.
+1. **Repo D** (`apex-design-patterns`, roadmap step 4): source-only (no package), scaffolded by hand from this template because the skill is user-invoked only.
+2. Step 6 final pass: sf-delivery-agents, hooks, the PR-review demo on C, and the case study.
+3. Optional, owner's choice: run the eval suite locally once (`claude plugin eval plugins/apex-standards --runs 1 --ablation none`, adding `--scaffold --allow-tools Bash Write Edit` for the scaffold case) and paste the summary into a PR.
