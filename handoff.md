@@ -1,10 +1,10 @@
 # Handoff: claude-code-salesforce-skills
 
-Last updated: 2026-11-18 · Phase: between roadmap steps. A, B and C are done and public; D (`apex-design-patterns`) is next. The step 6 final pass hasn't started.
+Last updated: 2026-11-18 · Phase: between roadmap steps. **Public since 2026-11-18.** A, B, C and D are done and public; F (`agentforce-action-pack`, step 5) is next. The step 6 final pass hasn't started.
 
 ## Done
 
-- Private repo created with an MIT license. Commits use the GitHub noreply identity.
+- Repo created private with an MIT license. Commits use the GitHub noreply identity.
 - Tooling: Prettier, markdownlint, commitlint (Conventional Commits), Husky + lint-staged, gitleaks with a custom Custom Metadata secret rule.
 - CI (free only): lint, commitlint, `claude plugin validate --strict` (offline), eval structure check, and a gitleaks full-history scan.
 - Plugin `apex-standards` 0.1.0 in marketplace `csquaredaz`, with five skills: `apex-fflib-layers`, `apex-security`, `apex-testing`, `apex-code-review`, and `sf-repo-scaffold` (user-invoked only).
@@ -28,6 +28,12 @@ Last updated: 2026-11-18 · Phase: between roadmap steps. A, B and C are done an
   - `SKILL.md` step 8: a repo that publishes a package runs `sf package create` once before its first tag, then restores `sfdx-project.json` keeping only the `0Ho` alias. A source-only repo also changes the Stack line in its `CLAUDE.md`.
   - Verified with a filled copy and a stub `sf`: with `SKIP_PERMSETS=1` the script deploys and assigns nothing, and without it it assigns permission sets from both directories. shellcheck is clean, and actionlint shows only the known notes (SC1083, SC2016, SC2038). D's scaffold is the first real run.
 
+- **Public 2026-11-18.** The pre-flip scan was clean, so no fix PR was needed and no runs were deleted:
+  - All 19 CI runs' logs: no org Ids, instance hosts, usernames or secrets (only the `noreply@anthropic.com` trailer and `***` masks). E's CI uploads no artifacts.
+  - 11 PRs (0 comments or reviews), 53 commits on all refs (noreply identities only), no releases or tags. gitleaks 8.30.1 found no leaks in the history or the tree. No employer or client names.
+  - The tree's only host and email hits are placeholders: `<my-domain>.my.salesforce.com` in the JWT guide, the template's `login.salesforce.com`, and an eval's `eval@users.noreply.github.com`.
+  - After Chad flipped visibility: the README renders anonymously, its badges and links return 200, the links from A–D to this repo resolve, and an anonymous clone has the `csquaredaz` marketplace with `apex-standards` 0.1.0 and its five skills. The template README's `docs/adr/0001-.md` link is an intentional placeholder.
+
 ## How the back-port was verified (no scratch orgs)
 
 - Filled-template smoke test: 0 placeholders left, then `npm install`, `format:check`, `lint`, `test:unit`, `analyze` (1 Low), `shellcheck`, a JSON parse, and commitlint on a good and a bad message. `format:check` fails when the trailing comma is put back.
@@ -41,6 +47,6 @@ Last updated: 2026-11-18 · Phase: between roadmap steps. A, B and C are done an
 
 ## Next
 
-1. **Repo D** (`apex-design-patterns`, roadmap step 4): source-only (no package), scaffolded by hand from this template because the skill is user-invoked only.
+1. **Repo F** (`agentforce-action-pack`, roadmap step 5): scaffold from this template after F's spike settles whether a free Developer Edition Dev Hub can create an Agentforce-capable scratch org. D (step 4) is done and public; its scaffold proved the C back-port.
 2. Step 6 final pass: sf-delivery-agents, hooks, the PR-review demo on C, and the case study.
 3. Optional, owner's choice: run the eval suite locally once (`claude plugin eval plugins/apex-standards --runs 1 --ablation none`, adding `--scaffold --allow-tools Bash Write Edit` for the scaffold case) and paste the summary into a PR.
